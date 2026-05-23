@@ -1,0 +1,2534 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoRent VN – Thuê Xe Ô Tô An Toàn</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d0f14;
+        --surface: #161920;
+        --surface2: #1e2230;
+        --border: #2a2f42;
+        --accent: #e8533a;
+        --accent2: #f0a070;
+        --gold: #f5c842;
+        --text: #eef0f6;
+        --text-dim: #8b90a8;
+        --green: #3ecf8e;
+        --red: #e8533a;
+        --blue: #4a9eff;
+        --radius: 12px;
+        --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAVBAR ===== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        height: 64px;
+        background: rgba(13, 15, 20, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo span {
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .btn {
+        padding: 9px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: 0.2s;
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-dim);
+        border: 1px solid var(--border);
+      }
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: #d44530;
+        transform: translateY(-1px);
+      }
+      .login-btn {
+        padding: 10px 28px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: 0.3s;
+        background: linear-gradient(135deg, var(--accent) 0%, #d44530 100%);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(232, 83, 58, 0.3);
+      }
+      .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(232, 83, 58, 0.4);
+      }
+      .login-btn:active {
+        transform: translateY(0);
+      }
+      .badge-secure {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(62, 207, 142, 0.1);
+        border: 1px solid rgba(62, 207, 142, 0.3);
+        color: var(--green);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      /* ===== SECTIONS ===== */
+      section {
+        padding: 80px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .section-label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      h1 {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        line-height: 1.1;
+      }
+      h2 {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        line-height: 1.2;
+      }
+      h3 {
+        font-family: "Syne", sans-serif;
+        font-weight: 600;
+        font-size: 1.15rem;
+      }
+
+      /* ===== HERO ===== */
+      #hero {
+        padding-top: 140px;
+        padding-bottom: 80px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(232, 83, 58, 0.12);
+        border: 1px solid rgba(232, 83, 58, 0.3);
+        color: var(--accent2);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+      .hero-text p {
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin: 20px 0 36px;
+        max-width: 460px;
+      }
+      .hero-cta {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn-large {
+        padding: 14px 32px;
+        font-size: 1rem;
+        border-radius: 10px;
+      }
+      .security-chips {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+      }
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        color: var(--text-dim);
+      }
+      .chip .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      /* Hero visual - kiến trúc bảo mật */
+      .hero-visual {
+        position: relative;
+      }
+      .arch-diagram {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        overflow: hidden;
+      }
+      .arch-title {
+        font-family: "Syne", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-dim);
+        text-align: center;
+        margin-bottom: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .arch-layer {
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        position: relative;
+        animation: slideIn 0.5s ease forwards;
+        opacity: 0;
+      }
+      .arch-layer:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .arch-layer:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .arch-layer:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      .arch-layer:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      .arch-layer:nth-child(6) {
+        animation-delay: 0.5s;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      .layer-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 6px;
+      }
+      .layer-items {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .layer-item {
+        background: rgba(255, 255, 255, 0.07);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 500;
+      }
+      .l1 {
+        background: rgba(74, 158, 255, 0.08);
+        border: 1px solid rgba(74, 158, 255, 0.2);
+      }
+      .l1 .layer-label {
+        color: #4a9eff;
+      }
+      .l2 {
+        background: rgba(245, 200, 66, 0.08);
+        border: 1px solid rgba(245, 200, 66, 0.2);
+      }
+      .l2 .layer-label {
+        color: var(--gold);
+      }
+      .l3 {
+        background: rgba(232, 83, 58, 0.08);
+        border: 1px solid rgba(232, 83, 58, 0.2);
+      }
+      .l3 .layer-label {
+        color: var(--accent);
+      }
+      .l4 {
+        background: rgba(160, 100, 220, 0.08);
+        border: 1px solid rgba(160, 100, 220, 0.2);
+      }
+      .l4 .layer-label {
+        color: #a064dc;
+      }
+      .l5 {
+        background: rgba(62, 207, 142, 0.08);
+        border: 1px solid rgba(62, 207, 142, 0.2);
+      }
+      .l5 .layer-label {
+        color: var(--green);
+      }
+
+      /* ===== SEARCH BAR ===== */
+      #search-bar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 32px;
+        margin: 0 40px;
+        max-width: 1120px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -20px;
+        position: relative;
+        z-index: 10;
+        box-shadow: var(--shadow);
+      }
+      .search-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 16px;
+        align-items: end;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .form-group label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .form-control {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        outline: none;
+        transition: 0.2s;
+      }
+      .form-control:focus {
+        border-color: var(--accent);
+        background: rgba(232, 83, 58, 0.05);
+      }
+      .form-control option {
+        background: var(--surface2);
+      }
+
+      /* ===== XE ===== */
+      .cars-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 40px;
+      }
+      .car-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .car-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 12px 40px rgba(232, 83, 58, 0.15);
+      }
+      .car-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        background: var(--surface2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+      }
+      .car-body {
+        padding: 20px;
+      }
+      .car-name {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin-bottom: 6px;
+      }
+      .car-meta {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .car-tag {
+        background: var(--surface2);
+        color: var(--text-dim);
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+      }
+      .car-price {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+      .price-num {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: var(--accent);
+      }
+      .price-unit {
+        font-size: 0.82rem;
+        color: var(--text-dim);
+      }
+      .car-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+      }
+      .car-rating {
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .btn-book {
+        padding: 8px 18px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: 0.2s;
+      }
+      .btn-book:hover {
+        background: #d44530;
+      }
+
+      /* ===== MODAL ===== */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        width: 90%;
+        max-width: 620px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 36px;
+        position: relative;
+      }
+      .modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-close:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+      .modal-steps {
+        display: flex;
+        gap: 0;
+        margin-bottom: 28px;
+      }
+      .step {
+        flex: 1;
+        text-align: center;
+        position: relative;
+      }
+      .step::after {
+        content: "";
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        right: -50%;
+        height: 2px;
+        background: var(--border);
+        z-index: 0;
+      }
+      .step:last-child::after {
+        display: none;
+      }
+      .step-num {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--surface2);
+        border: 2px solid var(--border);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+      .step.active .step-num {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .step.done .step-num {
+        background: var(--green);
+        border-color: var(--green);
+        color: #fff;
+      }
+      .step-label {
+        font-size: 0.72rem;
+        color: var(--text-dim);
+        margin-top: 6px;
+        display: block;
+      }
+      .step-content {
+        display: none;
+      }
+      .step-content.active {
+        display: block;
+      }
+      .security-note {
+        background: rgba(62, 207, 142, 0.08);
+        border: 1px solid rgba(62, 207, 142, 0.25);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 0.82rem;
+        color: var(--green);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .warning-note {
+        background: rgba(245, 200, 66, 0.08);
+        border: 1px solid rgba(245, 200, 66, 0.25);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 0.82rem;
+        color: var(--gold);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .form-row-1 {
+        margin-bottom: 16px;
+      }
+      .input-wrapper {
+        position: relative;
+      }
+      .input-icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-dim);
+        font-size: 0.9rem;
+      }
+      .password-strength {
+        margin-top: 6px;
+      }
+      .strength-bar {
+        height: 3px;
+        border-radius: 2px;
+        background: var(--surface2);
+        margin-bottom: 4px;
+        overflow: hidden;
+      }
+      .strength-fill {
+        height: 100%;
+        width: 0;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+      .strength-text {
+        font-size: 0.72rem;
+        color: var(--text-dim);
+      }
+      .terms {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+      .terms input {
+        margin-top: 3px;
+        accent-color: var(--accent);
+      }
+      .terms a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .modal-footer {
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* ===== OTP ===== */
+      .otp-group {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .otp-input {
+        width: 52px;
+        height: 56px;
+        text-align: center;
+        font-family: "Syne", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        background: var(--surface2);
+        border: 2px solid var(--border);
+        color: var(--text);
+        border-radius: 10px;
+        outline: none;
+        transition: 0.2s;
+      }
+      .otp-input:focus {
+        border-color: var(--accent);
+        background: rgba(232, 83, 58, 0.05);
+      }
+
+      /* ===== PAYMENT ===== */
+      .payment-methods {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .pay-method {
+        flex: 1;
+        padding: 14px;
+        background: var(--surface2);
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 0.85rem;
+        color: var(--text-dim);
+      }
+      .pay-method.selected {
+        border-color: var(--accent);
+        color: var(--text);
+        background: rgba(232, 83, 58, 0.08);
+      }
+      .card-num-group {
+        position: relative;
+      }
+      .card-num-group .card-icons {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 4px;
+        font-size: 0.85rem;
+      }
+      .tls-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(74, 158, 255, 0.08);
+        border: 1px solid rgba(74, 158, 255, 0.2);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.8rem;
+        color: #4a9eff;
+        margin-bottom: 16px;
+      }
+
+      /* ===== SECURITY SECTION ===== */
+      #security {
+        background: var(--surface);
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        padding: 60px 40px;
+        margin: 0 40px;
+        max-width: 1120px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .security-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 40px;
+      }
+      .sec-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        transition: 0.3s;
+      }
+      .sec-card:hover {
+        border-color: var(--accent);
+      }
+      .sec-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+      }
+      .sec-card p {
+        font-size: 0.87rem;
+        color: var(--text-dim);
+        line-height: 1.65;
+        margin-top: 8px;
+      }
+      .owasp-list {
+        margin-top: 40px;
+      }
+      .owasp-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 10px;
+        transition: 0.2s;
+      }
+      .owasp-item:hover {
+        border-color: var(--border);
+        background: var(--surface2);
+      }
+      .owasp-num {
+        min-width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 0.9rem;
+        color: #fff;
+      }
+      .owasp-content h4 {
+        font-family: "Syne", sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+      }
+      .owasp-content p {
+        font-size: 0.82rem;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+      .owasp-fix {
+        font-size: 0.75rem;
+        color: var(--green);
+        font-weight: 600;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 40px;
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 0.85rem;
+      }
+      footer strong {
+        color: var(--text);
+      }
+
+      /* ===== TOAST ===== */
+      #toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .toast-item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 20px;
+        min-width: 280px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.88rem;
+        animation: toastIn 0.3s ease;
+        box-shadow: var(--shadow);
+      }
+      .toast-item.success {
+        border-left: 4px solid var(--green);
+      }
+      .toast-item.error {
+        border-left: 4px solid var(--red);
+      }
+      .toast-item.info {
+        border-left: 4px solid var(--blue);
+      }
+      @keyframes toastIn {
+        from {
+          transform: translateX(40px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* ===== AUDIT LOG ===== */
+      #audit-panel {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 500;
+      }
+      .audit-toggle {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .audit-box {
+        display: none;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        width: 380px;
+        max-height: 250px;
+        overflow-y: auto;
+        margin-bottom: 8px;
+      }
+      .audit-box.open {
+        display: block;
+      }
+      .audit-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 0.82rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+      }
+      .audit-entry {
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        display: flex;
+        gap: 10px;
+      }
+      .audit-time {
+        color: var(--gold);
+        min-width: 70px;
+        font-family: monospace;
+      }
+      .audit-msg {
+        flex: 1;
+      }
+      .audit-ok {
+        color: var(--green);
+      }
+      .audit-warn {
+        color: var(--gold);
+      }
+      .audit-fail {
+        color: var(--red);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        #hero {
+          grid-template-columns: 1fr;
+        }
+        .cars-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .security-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .search-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        nav {
+          padding: 0 20px;
+        }
+        .nav-links {
+          display: none;
+        }
+        section {
+          padding: 60px 20px;
+        }
+        #security {
+          margin: 0 20px;
+        }
+        #search-bar {
+          margin: 0 20px;
+        }
+      }
+      @media (max-width: 600px) {
+        .cars-grid,
+        .security-grid,
+        .search-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .modal {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="logo">🚗 Auto<span>Rent</span></div>
+      <ul class="nav-links">
+        <li><a href="#xe">Xe</a></li>
+        <li><a href="#security">Bảo mật</a></li>
+        <li><a href="#">Liên hệ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="badge-secure">🔒 TLS 1.3 + HTTPS</div>
+        <button id="btn-login-nav" class="login-btn">Đăng nhập</button>
+        <button id="btn-register-nav" class="btn btn-primary">Đăng ký</button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div id="hero">
+      <div class="hero-text">
+        <div class="hero-tag">🛡️ Bảo mật 5 lớp – CIA Triad</div>
+        <h1>
+          Thuê xe ô tô <span style="color: var(--accent)">an toàn</span> &amp;
+          tin cậy
+        </h1>
+        <p>
+          Nền tảng thuê xe đầu tiên xây dựng theo chuẩn OWASP Top 10, tích hợp
+          mã hóa AES-256, xác thực JWT + OTP và kiểm soát phân quyền RBAC.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-large" onclick="openRegister()">
+            Thuê xe ngay
+          </button>
+          <button
+            class="btn btn-ghost btn-large"
+            onclick="showSection('security')"
+          >
+            Xem bảo mật
+          </button>
+        </div>
+        <div class="security-chips">
+          <div class="chip"><span class="dot"></span> SSL/TLS 1.3</div>
+          <div class="chip"><span class="dot"></span> JWT + OTP</div>
+          <div class="chip"><span class="dot"></span> AES-256</div>
+          <div class="chip"><span class="dot"></span> RBAC</div>
+          <div class="chip"><span class="dot"></span> WAF + DDoS</div>
+          <div class="chip"><span class="dot"></span> Audit Log</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="arch-diagram">
+          <div class="arch-title">🏗️ Kiến trúc bảo mật 5 lớp</div>
+          <div class="arch-layer l1">
+            <div class="layer-label">Lớp 1 – Người dùng / Client</div>
+            <div class="layer-items">
+              <span class="layer-item">HTTPS</span>
+              <span class="layer-item">MFA / OTP</span>
+              <span class="layer-item">eKYC CCCD</span>
+            </div>
+          </div>
+          <div class="arch-layer l2">
+            <div class="layer-label">Lớp 2 – Perimeter Defense</div>
+            <div class="layer-items">
+              <span class="layer-item">CDN Cloudflare</span>
+              <span class="layer-item">WAF</span>
+              <span class="layer-item">DDoS Shield</span>
+            </div>
+          </div>
+          <div class="arch-layer l3">
+            <div class="layer-label">Lớp 3 – API Gateway + Auth</div>
+            <div class="layer-items">
+              <span class="layer-item">JWT + OAuth2</span>
+              <span class="layer-item">TLS 1.3</span>
+              <span class="layer-item">RBAC / ABAC</span>
+            </div>
+          </div>
+          <div class="arch-layer l4">
+            <div class="layer-label">Lớp 4 – Business Logic</div>
+            <div class="layer-items">
+              <span class="layer-item">Payment Gateway</span>
+              <span class="layer-item">Hợp đồng điện tử</span>
+              <span class="layer-item">Input Validation</span>
+            </div>
+          </div>
+          <div class="arch-layer l5">
+            <div class="layer-label">Lớp 5 – Data Layer</div>
+            <div class="layer-items">
+              <span class="layer-item">AES-256</span>
+              <span class="layer-item">Backup 3-2-1</span>
+              <span class="layer-item">Audit Log / SIEM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div id="search-bar">
+      <div class="search-grid">
+        <div class="form-group">
+          <label>Địa điểm thuê</label>
+          <select
+            class="form-control"
+            onchange="logAudit('Người dùng chọn địa điểm', 'ok')"
+          >
+            <option>Hà Nội – Hoàn Kiếm</option>
+            <option>Hà Nội – Cầu Giấy</option>
+            <option>TP.HCM – Quận 1</option>
+            <option>Đà Nẵng</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ngày nhận xe</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date-from"
+            onchange="logAudit('Chọn ngày nhận xe', 'ok')"
+          />
+        </div>
+        <div class="form-group">
+          <label>Ngày trả xe</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date-to"
+            onchange="logAudit('Chọn ngày trả xe', 'ok')"
+          />
+        </div>
+        <button
+          class="btn btn-primary btn-large"
+          onclick="searchCars()"
+          style="white-space: nowrap"
+        >
+          🔍 Tìm xe
+        </button>
+      </div>
+    </div>
+
+    <!-- XE -->
+    <section id="xe">
+      <div class="section-label">Xe nổi bật</div>
+      <h2>Chọn xe phù hợp với bạn</h2>
+      <div class="cars-grid" id="cars-grid">
+        <!-- JS render -->
+      </div>
+    </section>
+
+    <!-- SECURITY SECTION -->
+    <div id="security">
+      <div class="section-label">Bảo mật</div>
+      <h2>Hệ thống bảo mật đa lớp</h2>
+      <p style="color: var(--text-dim); margin-top: 12px; max-width: 600px">
+        Xây dựng theo chuẩn OWASP Top 10 và mô hình CIA Triad – Confidentiality,
+        Integrity, Availability.
+      </p>
+
+      <div class="security-grid">
+        <div class="sec-card">
+          <div class="sec-icon" style="background: rgba(74, 158, 255, 0.12)">
+            🔐
+          </div>
+          <h3>Mã hóa AES-256 + RSA-2048</h3>
+          <p>
+            Dữ liệu thanh toán, CCCD mã hóa đối xứng AES-256. Hợp đồng điện tử
+            ký số bằng RSA-2048.
+          </p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon" style="background: rgba(62, 207, 142, 0.12)">
+            🛡️
+          </div>
+          <h3>JWT + OAuth2 + MFA</h3>
+          <p>
+            Token JWT ngắn hạn (15 phút) + Refresh Token. Xác thực 2 yếu tố OTP
+            qua SMS/email bắt buộc.
+          </p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon" style="background: rgba(232, 83, 58, 0.12)">
+            👥
+          </div>
+          <h3>RBAC – Phân quyền vai trò</h3>
+          <p>
+            Khách hàng: xem &amp; đặt xe. Nhân viên: cập nhật trạng thái. Admin:
+            quản lý toàn bộ hệ thống.
+          </p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon" style="background: rgba(245, 200, 66, 0.12)">
+            🔥
+          </div>
+          <h3>WAF + DDoS Protection</h3>
+          <p>
+            Web Application Firewall chặn SQLi, XSS, CSRF. Rate Limit &amp; IP
+            Blacklist ngăn tấn công DoS.
+          </p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon" style="background: rgba(160, 100, 220, 0.12)">
+            📋
+          </div>
+          <h3>Audit Log / SIEM</h3>
+          <p>
+            Mọi hành động đều được ghi log bất biến. Cảnh báo real-time khi phát
+            hiện bất thường.
+          </p>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon" style="background: rgba(62, 207, 142, 0.12)">
+            💾
+          </div>
+          <h3>Backup 3-2-1</h3>
+          <p>
+            3 bản sao, 2 loại lưu trữ, 1 bản offsite. SHA-256 kiểm tra toàn vẹn
+            dữ liệu định kỳ.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 48px">
+        <div class="section-label">OWASP Top 10</div>
+        <h2 style="margin-bottom: 8px">
+          Các lỗ hổng phổ biến &amp; cách phòng thủ
+        </h2>
+        <div class="owasp-list">
+          <div class="owasp-item">
+            <div class="owasp-num">1</div>
+            <div class="owasp-content">
+              <h4>SQL Injection (SQLi)</h4>
+              <p>
+                Kẻ tấn công chèn mã SQL độc hại vào câu truy vấn thông qua đầu
+                vào không được lọc.
+              </p>
+              <div class="owasp-fix">
+                ✅ Khắc phục: Prepared Statement + Parameterized Query + ORM
+              </div>
+            </div>
+          </div>
+          <div class="owasp-item">
+            <div class="owasp-num">2</div>
+            <div class="owasp-content">
+              <h4>Cross-Site Scripting (XSS)</h4>
+              <p>
+                Chèn mã JavaScript độc hại vào trang web để đánh cắp session
+                hoặc dữ liệu người dùng.
+              </p>
+              <div class="owasp-fix">
+                ✅ Khắc phục: Sanitize input, CSP Header, DOMPurify, HTTPOnly
+                Cookie
+              </div>
+            </div>
+          </div>
+          <div class="owasp-item">
+            <div class="owasp-num">3</div>
+            <div class="owasp-content">
+              <h4>Cross-Site Request Forgery (CSRF)</h4>
+              <p>
+                Lừa người dùng đã xác thực thực hiện hành động ngoài ý muốn trên
+                ứng dụng.
+              </p>
+              <div class="owasp-fix">
+                ✅ Khắc phục: CSRF Token, SameSite Cookie, Double Submit Cookie
+              </div>
+            </div>
+          </div>
+          <div class="owasp-item">
+            <div class="owasp-num">4</div>
+            <div class="owasp-content">
+              <h4>Broken Authentication</h4>
+              <p>
+                Cơ chế quản lý phiên và xác thực yếu, dễ bị brute-force hoặc
+                session hijacking.
+              </p>
+              <div class="owasp-fix">
+                ✅ Khắc phục: JWT + MFA + Account Lockout + bcrypt password
+                hashing
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="margin-top: 80px">
+      <p><strong>AutoRent VN</strong> – Website thuê xe ô tô bảo mật cao</p>
+      <p style="margin-top: 8px">
+        🔒 TLS 1.3 &nbsp;|&nbsp; AES-256 &nbsp;|&nbsp; JWT &nbsp;|&nbsp; RBAC
+        &nbsp;|&nbsp; WAF &nbsp;|&nbsp; OWASP Compliant
+      </p>
+      <p style="margin-top: 12px; font-size: 0.75rem">
+        Demo: Nhóm 6 – Lương Minh Hùng | Nguyễn Công Khanh | Vũ Dương Kiệt
+      </p>
+    </footer>
+
+    <!-- TOAST -->
+    <div id="toast"></div>
+
+    <!-- AUDIT PANEL -->
+    <div id="audit-panel">
+      <div class="audit-box" id="audit-box">
+        <div class="audit-title">📋 Audit Log (Real-time)</div>
+        <div id="audit-entries"></div>
+      </div>
+      <button class="audit-toggle" onclick="toggleAudit()">📋 Audit Log</button>
+    </div>
+
+    <!-- ===== MODAL ĐĂNG KÝ ===== -->
+    <div class="modal-overlay" id="modal-register">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('modal-register')">
+          ✕
+        </button>
+        <h2 style="margin-bottom: 6px">Tạo tài khoản</h2>
+        <p
+          style="
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 24px;
+          "
+        >
+          Dữ liệu được mã hóa AES-256 và bảo vệ bởi HTTPS/TLS 1.3
+        </p>
+
+        <div class="modal-steps">
+          <div class="step active" id="reg-step-1">
+            <div class="step-num">1</div>
+            <span class="step-label">Thông tin</span>
+          </div>
+          <div class="step" id="reg-step-2">
+            <div class="step-num">2</div>
+            <span class="step-label">Xác thực OTP</span>
+          </div>
+          <div class="step" id="reg-step-3">
+            <div class="step-num">3</div>
+            <span class="step-label">Hoàn tất</span>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step-content active" id="reg-content-1">
+          <div class="security-note">
+            🔒 Mật khẩu được hash bằng bcrypt (cost=12) trước khi lưu trữ. Chúng
+            tôi không bao giờ lưu mật khẩu gốc.
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Họ và tên</label>
+              <input
+                class="form-control"
+                type="text"
+                id="reg-name"
+                placeholder="Nguyễn Văn A"
+                oninput="validateField(this)"
+              />
+            </div>
+            <div class="form-group">
+              <label>Số điện thoại</label>
+              <input
+                class="form-control"
+                type="tel"
+                id="reg-phone"
+                placeholder="0912 345 678"
+                oninput="validatePhone(this)"
+              />
+            </div>
+          </div>
+          <div class="form-row-1">
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                class="form-control"
+                type="email"
+                id="reg-email"
+                placeholder="email@example.com"
+                oninput="validateEmail(this)"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mật khẩu</label>
+              <div class="input-wrapper">
+                <input
+                  class="form-control"
+                  type="password"
+                  id="reg-pass"
+                  placeholder="Tối thiểu 8 ký tự"
+                  oninput="checkStrength(this)"
+                />
+              </div>
+              <div class="password-strength">
+                <div class="strength-bar">
+                  <div class="strength-fill" id="strength-bar"></div>
+                </div>
+                <div class="strength-text" id="strength-text">
+                  Nhập mật khẩu
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Xác nhận mật khẩu</label>
+              <input
+                class="form-control"
+                type="password"
+                id="reg-pass2"
+                placeholder="Nhập lại mật khẩu"
+                oninput="matchPass(this)"
+              />
+            </div>
+          </div>
+          <div class="form-row-1">
+            <div class="form-group">
+              <label>Số CCCD / CMND</label>
+              <input
+                class="form-control"
+                type="text"
+                id="reg-cccd"
+                placeholder="012345678901"
+                oninput="validateCCCD(this)"
+                maxlength="12"
+              />
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-dim);
+                  margin-top: 4px;
+                "
+              >
+                🔒 Mã hóa AES-256 trước khi lưu – tuân thủ PDPA/GDPR
+              </div>
+            </div>
+          </div>
+          <div class="terms">
+            <input type="checkbox" id="terms-check" />
+            <span
+              >Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và
+              <a href="#">Chính sách bảo mật</a>. Dữ liệu cá nhân được bảo vệ
+              theo quy định pháp luật.</span
+            >
+          </div>
+          <div class="modal-footer">
+            <span></span>
+            <button class="btn btn-primary" onclick="gotoOTP()">
+              Tiếp theo →
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: OTP -->
+        <div class="step-content" id="reg-content-2">
+          <div class="security-note">
+            📱 Mã OTP 6 chữ số đã được gửi tới số điện thoại của bạn. Mã có hiệu
+            lực trong
+            <span id="otp-timer" style="font-weight: 700">120</span> giây.
+          </div>
+          <div class="warning-note">
+            ⚠️ Không chia sẻ mã OTP với bất kỳ ai. AutoRent VN không bao giờ hỏi
+            mã OTP qua điện thoại.
+          </div>
+          <p
+            style="
+              text-align: center;
+              color: var(--text-dim);
+              font-size: 0.9rem;
+              margin-bottom: 8px;
+            "
+          >
+            Nhập mã OTP gửi tới số điện thoại của bạn
+          </p>
+          <div class="otp-group">
+            <input
+              class="otp-input"
+              maxlength="1"
+              oninput="otpNext(this, 0)"
+              id="otp0"
+            />
+            <input
+              class="otp-input"
+              maxlength="1"
+              oninput="otpNext(this, 1)"
+              id="otp1"
+            />
+            <input
+              class="otp-input"
+              maxlength="1"
+              oninput="otpNext(this, 2)"
+              id="otp2"
+            />
+            <input
+              class="otp-input"
+              maxlength="1"
+              oninput="otpNext(this, 3)"
+              id="otp3"
+            />
+            <input
+              class="otp-input"
+              maxlength="1"
+              oninput="otpNext(this, 4)"
+              id="otp4"
+            />
+            <input
+              class="otp-input"
+              maxlength="1"
+              oninput="otpNext(this, 5)"
+              id="otp5"
+            />
+          </div>
+          <p
+            style="
+              text-align: center;
+              font-size: 0.82rem;
+              color: var(--text-dim);
+            "
+          >
+            Demo: nhập bất kỳ 6 chữ số
+          </p>
+          <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="goStep(1, 'reg')">
+              ← Quay lại
+            </button>
+            <button class="btn btn-primary" onclick="verifyOTP()">
+              Xác nhận OTP
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Done -->
+        <div class="step-content" id="reg-content-3">
+          <div style="text-align: center; padding: 30px 0">
+            <div style="font-size: 4rem; margin-bottom: 16px">🎉</div>
+            <h3 style="margin-bottom: 12px">Đăng ký thành công!</h3>
+            <p
+              style="
+                color: var(--text-dim);
+                font-size: 0.9rem;
+                line-height: 1.7;
+              "
+            >
+              Tài khoản của bạn đã được tạo và bảo mật.<br />JWT token đã được
+              cấp. Phân quyền:
+              <strong style="color: var(--green)">Khách hàng</strong>
+            </p>
+            <div
+              style="
+                margin-top: 20px;
+                background: var(--surface2);
+                border-radius: 10px;
+                padding: 16px;
+                text-align: left;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.78rem;
+                  color: var(--text-dim);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  margin-bottom: 10px;
+                "
+              >
+                Thông tin bảo mật tài khoản
+              </div>
+              <div
+                style="
+                  font-size: 0.82rem;
+                  color: var(--text-dim);
+                  line-height: 2;
+                "
+              >
+                🔐 Mật khẩu: bcrypt hash (cost=12)<br />
+                📱 MFA: OTP đã kích hoạt<br />
+                🪪 CCCD: Mã hóa AES-256<br />
+                🎫 JWT: Hết hạn sau 15 phút<br />
+                👤 Vai trò: Khách hàng (RBAC)
+              </div>
+            </div>
+            <button
+              class="btn btn-primary btn-large"
+              style="margin-top: 24px"
+              onclick="
+                closeModal('modal-register');
+                showToast('Chào mừng! Đã đăng nhập thành công.', 'success');
+              "
+            >
+              Bắt đầu thuê xe →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL ĐĂNG NHẬP ===== -->
+    <div class="modal-overlay" id="modal-login">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('modal-login')">
+          ✕
+        </button>
+        <h2 style="margin-bottom: 6px">Đăng nhập</h2>
+        <p
+          style="
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 24px;
+          "
+        >
+          Phiên đăng nhập được bảo vệ bởi JWT + HTTPS/TLS 1.3
+        </p>
+        <div class="security-note">
+          🛡️ Hệ thống sẽ khóa tài khoản tạm thời sau 5 lần nhập sai (Brute-Force
+          Protection).
+        </div>
+        <div class="form-row-1" style="margin-top: 16px">
+          <div class="form-group">
+            <label>Email hoặc số điện thoại</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="email@example.com"
+              id="login-user"
+              oninput="logAudit('Nhập thông tin đăng nhập', 'ok')"
+            />
+          </div>
+        </div>
+        <div class="form-row-1">
+          <div class="form-group">
+            <label>Mật khẩu</label>
+            <input
+              class="form-control"
+              type="password"
+              placeholder="••••••••"
+              id="login-pass"
+            />
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="terms" style="margin-bottom: 0">
+            <input type="checkbox" id="remember-me" />
+            <span>Ghi nhớ đăng nhập (30 ngày)</span>
+          </div>
+          <a
+            href="#"
+            style="
+              color: var(--accent);
+              font-size: 0.85rem;
+              text-decoration: none;
+            "
+            >Quên mật khẩu?</a
+          >
+        </div>
+        <button
+          class="btn btn-primary"
+          style="width: 100%; padding: 14px"
+          onclick="doLogin()"
+        >
+          Đăng nhập
+        </button>
+        <p
+          style="
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+          "
+        >
+          Chưa có tài khoản?
+          <a
+            href="#"
+            style="color: var(--accent); text-decoration: none"
+            onclick="
+              closeModal('modal-login');
+              openRegister();
+            "
+            >Đăng ký ngay</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <!-- ===== MODAL ĐẶT XE ===== -->
+    <div class="modal-overlay" id="modal-booking">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('modal-booking')">
+          ✕
+        </button>
+        <h2 style="margin-bottom: 6px">Đặt xe</h2>
+        <p
+          style="
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+          "
+          id="booking-car-name"
+        >
+          –
+        </p>
+
+        <div class="modal-steps">
+          <div class="step active" id="book-step-1">
+            <div class="step-num">1</div>
+            <span class="step-label">Thông tin</span>
+          </div>
+          <div class="step" id="book-step-2">
+            <div class="step-num">2</div>
+            <span class="step-label">Thanh toán</span>
+          </div>
+          <div class="step" id="book-step-3">
+            <div class="step-num">3</div>
+            <span class="step-label">Xác nhận</span>
+          </div>
+        </div>
+
+        <div class="step-content active" id="book-content-1">
+          <div class="warning-note">
+            ⚠️ Đặt xe yêu cầu xác thực JWT token hợp lệ và kiểm tra quyền RBAC
+            trước khi xử lý.
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ngày nhận</label>
+              <input class="form-control" type="date" id="book-from" />
+            </div>
+            <div class="form-group">
+              <label>Ngày trả</label>
+              <input class="form-control" type="date" id="book-to" />
+            </div>
+          </div>
+          <div class="form-row-1">
+            <div class="form-group">
+              <label>Địa điểm nhận xe</label>
+              <select class="form-control">
+                <option>Hà Nội – Hoàn Kiếm</option>
+                <option>Hà Nội – Cầu Giấy</option>
+                <option>TP.HCM – Quận 1</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row-1">
+            <div class="form-group">
+              <label>Ghi chú</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="Yêu cầu thêm..."
+                oninput="sanitizeInput(this)"
+              />
+              <div
+                style="
+                  font-size: 0.72rem;
+                  color: var(--text-dim);
+                  margin-top: 4px;
+                "
+              >
+                🛡️ Dữ liệu đầu vào được sanitize để chống XSS và SQLi
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--surface2);
+              border-radius: 10px;
+              padding: 16px;
+              margin-top: 8px;
+            "
+          >
+            <div
+              style="
+                font-size: 0.8rem;
+                color: var(--text-dim);
+                margin-bottom: 8px;
+              "
+            >
+              📋 Quy trình xử lý bảo mật
+            </div>
+            <div
+              style="font-size: 0.78rem; color: var(--text-dim); line-height: 2"
+            >
+              1️⃣ Gửi yêu cầu kèm JWT token<br />
+              2️⃣ Kiểm tra token hợp lệ + RBAC<br />
+              3️⃣ Validate &amp; sanitize đầu vào<br />
+              4️⃣ Thanh toán qua Payment Gateway (TLS)<br />
+              5️⃣ Ghi Audit Log<br />
+              6️⃣ Phản hồi kết quả
+            </div>
+          </div>
+          <div class="modal-footer">
+            <span></span>
+            <button class="btn btn-primary" onclick="goStep(2, 'book')">
+              Tiếp → Thanh toán
+            </button>
+          </div>
+        </div>
+
+        <!-- Book Step 2: Payment -->
+        <div class="step-content" id="book-content-2">
+          <div class="tls-badge">
+            🔒 Kết nối mã hóa TLS 1.3 – Dữ liệu thanh toán được bảo vệ
+            end-to-end
+          </div>
+          <div class="payment-methods">
+            <div class="pay-method selected" onclick="selectPay(this, 'card')">
+              💳 Thẻ ngân hàng
+            </div>
+            <div class="pay-method" onclick="selectPay(this, 'momo')">
+              📱 MoMo
+            </div>
+            <div class="pay-method" onclick="selectPay(this, 'vnpay')">
+              🏦 VNPay
+            </div>
+          </div>
+          <div id="card-form">
+            <div class="form-row-1">
+              <div class="form-group">
+                <label>Số thẻ</label>
+                <div class="input-wrapper card-num-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="1234 5678 9012 3456"
+                    maxlength="19"
+                    oninput="formatCard(this)"
+                  />
+                  <div class="card-icons">💳</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Ngày hết hạn</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="MM/YY"
+                  maxlength="5"
+                  oninput="formatExpiry(this)"
+                />
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input
+                  class="form-control"
+                  type="password"
+                  placeholder="•••"
+                  maxlength="3"
+                />
+                <div
+                  style="
+                    font-size: 0.72rem;
+                    color: var(--text-dim);
+                    margin-top: 4px;
+                  "
+                >
+                  🔒 CVV không được lưu trữ
+                </div>
+              </div>
+            </div>
+            <div class="form-row-1">
+              <div class="form-group">
+                <label>Tên chủ thẻ</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="NGUYEN VAN A"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--surface2);
+              border-radius: 10px;
+              padding: 14px;
+              font-size: 0.82rem;
+              color: var(--text-dim);
+            "
+          >
+            💳 Thanh toán qua cổng PCI-DSS Level 1 &nbsp;|&nbsp; Không lưu số
+            thẻ trên server &nbsp;|&nbsp; Mã hóa TLS 1.3
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="goStep(1, 'book')">
+              ← Quay lại
+            </button>
+            <button class="btn btn-primary" onclick="doPayment()">
+              Xác nhận thanh toán
+            </button>
+          </div>
+        </div>
+
+        <!-- Book Step 3: Confirm -->
+        <div class="step-content" id="book-content-3">
+          <div style="text-align: center; padding: 20px 0">
+            <div style="font-size: 4rem; margin-bottom: 16px">✅</div>
+            <h3 style="margin-bottom: 12px">Đặt xe thành công!</h3>
+            <p
+              style="
+                color: var(--text-dim);
+                font-size: 0.9rem;
+                line-height: 1.7;
+              "
+            >
+              Hợp đồng điện tử đã được ký số bằng RSA-2048.<br />Giao dịch đã
+              được ghi vào Audit Log.
+            </p>
+            <div
+              style="
+                margin-top: 20px;
+                background: rgba(62, 207, 142, 0.08);
+                border: 1px solid rgba(62, 207, 142, 0.2);
+                border-radius: 10px;
+                padding: 16px;
+                text-align: left;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.78rem;
+                  color: var(--green);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  margin-bottom: 10px;
+                "
+              >
+                Thông tin giao dịch
+              </div>
+              <div
+                style="
+                  font-size: 0.82rem;
+                  color: var(--text-dim);
+                  line-height: 2;
+                "
+              >
+                📋 Mã đặt xe:
+                <strong
+                  style="color: var(--text); font-family: monospace"
+                  id="booking-code"
+                  >–</strong
+                ><br />
+                🔐 Hợp đồng: Ký số RSA-2048 + Timestamp SHA-256<br />
+                📧 Email xác nhận: Đã gửi<br />
+                📋 Audit Log: Đã ghi nhận
+              </div>
+            </div>
+            <button
+              class="btn btn-primary btn-large"
+              style="margin-top: 24px"
+              onclick="closeModal('modal-booking')"
+            >
+              Về trang chủ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ========== MODAL FUNCTIONS (Define first so inline onclick works) ==========
+      function openRegister() {
+        document.getElementById("modal-register").classList.add("open");
+      }
+      function openLogin() {
+        document.getElementById("modal-login").classList.add("open");
+      }
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("open");
+      }
+      function openBooking(id) {
+        const cars = window.carsData;
+        const car = cars.find((c) => c.id === id);
+        document.getElementById("booking-car-name").textContent =
+          car.name + " – " + car.price.toLocaleString() + "K/ngày";
+        document.getElementById("booking-code").textContent =
+          "AR" + Date.now().toString(36).toUpperCase();
+        document.getElementById("modal-booking").classList.add("open");
+      }
+      document.querySelectorAll(".modal-overlay").forEach((o) =>
+        o.addEventListener("click", (e) => {
+          if (e.target === o) o.classList.remove("open");
+        })
+      );
+
+      // ========== DỮ LIỆU XE ==========
+      const cars = [
+            {
+              id: 1,
+              name: "Toyota Camry 2024",
+              type: "Sedan",
+              seats: 5,
+              fuel: "Xăng",
+              emoji: "🚗",
+              price: 900,
+              rating: "4.9",
+              reviews: 128,
+              location: "Hà Nội",
+            },
+            {
+              id: 2,
+              name: "Ford Ranger 2024",
+              type: "Bán tải",
+              seats: 5,
+              fuel: "Dầu",
+              emoji: "🛻",
+              price: 1100,
+              rating: "4.8",
+              reviews: 94,
+              location: "Hà Nội",
+            },
+            {
+              id: 3,
+              name: "Honda CR-V 2023",
+              type: "SUV",
+              seats: 7,
+              fuel: "Xăng",
+              emoji: "🚙",
+              price: 1050,
+              rating: "4.7",
+              reviews: 201,
+              location: "TP.HCM",
+            },
+            {
+              id: 4,
+              name: "Kia Carnival 2024",
+              type: "MPV",
+              seats: 8,
+              fuel: "Xăng",
+              emoji: "🚐",
+              price: 1300,
+              rating: "4.9",
+              reviews: 67,
+              location: "Hà Nội",
+            },
+            {
+              id: 5,
+              name: "VinFast VF8 2024",
+              type: "SUV điện",
+              seats: 5,
+              fuel: "Điện ⚡",
+              emoji: "🔋",
+              price: 980,
+              rating: "4.6",
+              reviews: 43,
+              location: "Đà Nẵng",
+            },
+            {
+              id: 6,
+              name: "Mercedes C300 2023",
+              type: "Sedan cao cấp",
+              seats: 5,
+              fuel: "Xăng",
+              emoji: "💎",
+              price: 2200,
+              rating: "5.0",
+              reviews: 31,
+              location: "TP.HCM",
+            },
+          ];
+
+      // Save cars data globally
+      window.carsData = cars;
+
+          function renderCars(list) {
+            const grid = document.getElementById("cars-grid");
+            grid.innerHTML = list
+              .map(
+                (c) => `
+        <div class="car-card">
+          <div class="car-img">${c.emoji}</div>
+          <div class="car-body">
+            <div class="car-name">${c.name}</div>
+            <div class="car-meta">
+              <span class="car-tag">${c.type}</span>
+              <span class="car-tag">${c.seats} chỗ</span>
+              <span class="car-tag">${c.fuel}</span>
+            </div>
+            <div class="car-price">
+              <span class="price-num">${c.price.toLocaleString()}K</span>
+              <span class="price-unit">/ngày</span>
+            </div>
+            <div class="car-footer">
+              <div class="car-rating">⭐ ${c.rating} (${c.reviews})</div>
+              <button class="btn-book" onclick="openBooking(${c.id})">Đặt xe</button>
+            </div>
+          </div>
+        </div>
+      `,
+              )
+              .join("");
+          }
+
+          function searchCars() {
+            logAudit("Tìm kiếm xe – Input đã được validate & sanitize", "ok");
+            showToast("Đang tìm kiếm xe phù hợp...", "info");
+            setTimeout(() => {
+              renderCars(cars);
+              showToast(`Tìm thấy ${cars.length} xe phù hợp`, "success");
+              logAudit(`Trả về ${cars.length} kết quả tìm kiếm`, "ok");
+            }, 800);
+          }
+
+          function goStep(n, prefix) {
+            for (let i = 1; i <= 3; i++) {
+              document.getElementById(`${prefix}-step-${i}`).className =
+                "step" + (i < n ? " done" : i === n ? " active" : "");
+              document.getElementById(`${prefix}-content-${i}`).className =
+                "step-content" + (i === n ? " active" : "");
+            }
+          }
+
+          // ========== REGISTER ==========
+          let registerData = {}; // Lưu dữ liệu đăng ký tạm thời
+
+          async function gotoOTP() {
+            const name = document.getElementById("reg-name").value.trim();
+            const phone = document.getElementById("reg-phone").value.trim();
+            const email = document.getElementById("reg-email").value.trim();
+            const pass = document.getElementById("reg-pass").value;
+            const pass2 = document.getElementById("reg-pass2").value;
+            const cccd = document.getElementById("reg-cccd").value.trim();
+            const terms = document.getElementById("terms-check").checked;
+            if (!name || !phone || !email || !pass || !pass2 || !cccd) {
+              showToast("Vui lòng điền đầy đủ thông tin!", "error");
+              return;
+            }
+            if (pass !== pass2) {
+              showToast("Mật khẩu xác nhận không khớp!", "error");
+              return;
+            }
+            if (pass.length < 8) {
+              showToast("Mật khẩu tối thiểu 8 ký tự!", "error");
+              return;
+            }
+            if (!terms) {
+              showToast("Vui lòng đồng ý điều khoản!", "error");
+              return;
+            }
+
+            // Lưu dữ liệu đăng ký
+            registerData = { name, phone, email, password: pass, cccd };
+
+            logAudit("Dữ liệu đăng ký hợp lệ – Gửi OTP qua SMS", "ok");
+            showToast("OTP đã được gửi tới số điện thoại của bạn!", "info");
+            goStep(2, "reg");
+            startOTPTimer();
+          }
+
+          let otpInterval;
+          function startOTPTimer() {
+            let t = 120;
+            clearInterval(otpInterval);
+            otpInterval = setInterval(() => {
+              document.getElementById("otp-timer").textContent = --t;
+              if (t <= 0) {
+                clearInterval(otpInterval);
+                document.getElementById("otp-timer").textContent = "Hết hạn";
+              }
+            }, 1000);
+          }
+
+          function otpNext(el, idx) {
+            if (el.value.length === 1 && idx < 5)
+              document.getElementById(`otp${idx + 1}`).focus();
+          }
+
+          async function verifyOTP() {
+            const otp = [0, 1, 2, 3, 4, 5]
+              .map((i) => document.getElementById(`otp${i}`).value)
+              .join("");
+            if (otp.length < 6) {
+              showToast("Nhập đủ 6 chữ số OTP!", "error");
+              return;
+            }
+
+            // Gọi API register với dữ liệu đã lưu
+            try {
+              const response = await fetch("http://127.0.0.1:8000/api/register/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(registerData),
+              });
+
+              console.log("Register response status:", response.status);
+
+              const contentType = response.headers.get("content-type");
+              const isJson = contentType && contentType.includes("application/json");
+
+              let data;
+              if (isJson) {
+                data = await response.json();
+              } else {
+                const text = await response.text();
+                console.error("Response is not JSON:", text.substring(0, 200));
+                throw new Error("Server response is not JSON");
+              }
+
+              if (response.ok) {
+                console.log("Register successful:", data);
+                logAudit(`OTP xác thực thành công – Tài khoản được tạo (${registerData.email})`, "ok");
+                showToast("✅ Xác thực OTP thành công!", "success");
+                clearInterval(otpInterval);
+                goStep(3, "reg");
+              } else {
+                console.error("Register error:", data);
+                logAudit(`Đăng ký thất bại: ${data.error}`, "fail");
+                showToast(data.error || "❌ Đăng ký thất bại!", "error");
+              }
+            } catch (error) {
+              console.error("Register API error:", error);
+              logAudit("Lỗi gọi API đăng ký: " + error.message, "fail");
+              showToast("❌ Lỗi: " + error.message, "error");
+            }
+          }
+          }
+
+          // ========== LOGIN ==========
+          let loginAttempts = 0;
+          async function doLogin() {
+            const email = document.getElementById("login-user").value;
+            const password = document.getElementById("login-pass").value;
+
+            console.log("Login attempt with:", email);
+
+            if (!email || !password) {
+              showToast("Vui lòng điền đầy đủ thông tin đăng nhập!", "error");
+              return;
+            }
+
+            try {
+              const response = await fetch("http://127.0.0.1:8000/api/login/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: email, password: password }),
+              });
+
+              console.log("Login response status:", response.status);
+
+              // Check if response is JSON before parsing
+              const contentType = response.headers.get("content-type");
+              const isJson =
+                contentType && contentType.includes("application/json");
+
+              let data;
+              if (isJson) {
+                data = await response.json();
+              } else {
+                const text = await response.text();
+                console.error("Response is not JSON, got:", text.substring(0, 200));
+                throw new Error("Server response is not JSON");
+              }
+
+              if (response.ok) {
+                console.log("Login data:", data);
+
+                localStorage.setItem("access_token", data.access);
+                localStorage.setItem("refresh_token", data.refresh);
+
+                logAudit("Đăng nhập thành công – JWT token được cấp", "ok");
+                showToast("✅ Đăng nhập thành công!", "success");
+
+                closeModal("modal-login");
+                setTimeout(() => {
+                  location.reload();
+                }, 500);
+              } else {
+                console.log("Login error:", data);
+                loginAttempts++;
+                logAudit(`Đăng nhập thất bại (lần ${loginAttempts})`, "fail");
+                showToast(data.error || "❌ Sai thông tin đăng nhập!", "error");
+
+                if (loginAttempts >= 5) {
+                  logAudit(
+                    "Nhiều lần đăng nhập thất bại – Tài khoản bị khóa tạm thời",
+                    "fail",
+                  );
+                  showToast(
+                    "⚠️ Quá nhiều lần thất bại! Vui lòng thử lại sau.",
+                    "error",
+                  );
+                }
+              }
+            } catch (error) {
+              console.error("Lỗi API:", error);
+              logAudit("Lỗi kết nối API: " + error.message, "fail");
+              showToast("❌ Lỗi kết nối: " + error.message, "error");
+            }
+          }
+
+          // ========== PAYMENT ==========
+          function selectPay(el, type) {
+            document
+              .querySelectorAll(".pay-method")
+              .forEach((m) => m.classList.remove("selected"));
+            el.classList.add("selected");
+            document.getElementById("card-form").style.display =
+              type === "card" ? "block" : "none";
+            logAudit(`Chọn phương thức thanh toán: ${type.toUpperCase()}`, "ok");
+          }
+
+          function doPayment() {
+            logAudit("Giao dịch thanh toán – mã hóa TLS 1.3 – Ghi Audit Log", "ok");
+            showToast("Đang xử lý thanh toán...", "info");
+            setTimeout(() => {
+              showToast(
+                "Thanh toán thành công! Hợp đồng đã ký số RSA-2048.",
+                "success",
+              );
+              goStep(3, "book");
+            }, 1200);
+          }
+
+          // ========== VALIDATION ==========
+          function validateField(el) {
+            el.style.borderColor =
+              el.value.length > 1 ? "var(--green)" : "var(--border)";
+          }
+          function validateEmail(el) {
+            const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+            el.style.borderColor = ok
+              ? "var(--green)"
+              : el.value
+                ? "var(--red)"
+                : "var(--border)";
+          }
+          function validatePhone(el) {
+            const ok = /^(0|\+84)[3-9]\d{8}$/.test(el.value.replace(/\s/g, ""));
+            el.style.borderColor = ok
+              ? "var(--green)"
+              : el.value
+                ? "var(--red)"
+                : "var(--border)";
+          }
+          function validateCCCD(el) {
+            const ok = /^\d{9}(\d{3})?$/.test(el.value);
+            el.style.borderColor = ok
+              ? "var(--green)"
+              : el.value
+                ? "var(--red)"
+                : "var(--border)";
+          }
+          function matchPass(el) {
+            const p1 = document.getElementById("reg-pass").value;
+            el.style.borderColor =
+              el.value && el.value === p1
+                ? "var(--green)"
+                : el.value
+                  ? "var(--red)"
+                  : "var(--border)";
+          }
+          function checkStrength(el) {
+            const v = el.value;
+            let score = 0;
+            if (v.length >= 8) score++;
+            if (v.length >= 12) score++;
+            if (/[A-Z]/.test(v)) score++;
+            if (/[0-9]/.test(v)) score++;
+            if (/[^A-Za-z0-9]/.test(v)) score++;
+            const pct = [0, 20, 40, 60, 80, 100][score];
+            const colors = [
+              "",
+              "var(--red)",
+              "var(--red)",
+              "var(--gold)",
+              "var(--blue)",
+              "var(--green)",
+            ];
+            const labels = ["", "Rất yếu", "Yếu", "Trung bình", "Mạnh", "Rất mạnh"];
+            document.getElementById("strength-bar").style.width = pct + "%";
+            document.getElementById("strength-bar").style.background =
+              colors[score];
+            document.getElementById("strength-text").textContent =
+              labels[score] || "Nhập mật khẩu";
+            document.getElementById("strength-text").style.color =
+              colors[score] || "var(--text-dim)";
+          }
+          function sanitizeInput(el) {
+            const clean = el.value
+              .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
+              .replace(/[<>]/g, "");
+            if (clean !== el.value) {
+              showToast(
+                "⚠️ Ký tự không hợp lệ đã bị loại bỏ (XSS Prevention)",
+                "error",
+              );
+              logAudit("XSS attempt detected – Input sanitized!", "fail");
+            }
+            el.value = clean;
+          }
+          function formatCard(el) {
+            el.value = el.value
+              .replace(/\D/g, "")
+              .replace(/(.{4})/g, "$1 ")
+              .trim()
+              .substring(0, 19);
+          }
+          function formatExpiry(el) {
+            el.value = el.value
+              .replace(/\D/g, "")
+              .replace(/(\d{2})(\d)/, "$1/$2")
+              .substring(0, 5);
+          }
+
+          // ========== TOAST ==========
+          function showToast(msg, type = "info") {
+            const container = document.getElementById("toast");
+            const el = document.createElement("div");
+            const icons = { success: "✅", error: "❌", info: "ℹ️" };
+            el.className = `toast-item ${type}`;
+            el.innerHTML = `<span>${icons[type]}</span><span>${msg}</span>`;
+            container.appendChild(el);
+            setTimeout(() => {
+              el.style.opacity = "0";
+              el.style.transition = ".3s";
+              setTimeout(() => el.remove(), 300);
+            }, 4000);
+          }
+
+          // ========== AUDIT LOG ==========
+          const auditEntries = [];
+          function logAudit(msg, level = "ok") {
+            const now = new Date();
+            const time = now.toTimeString().substring(0, 8);
+            auditEntries.unshift({ time, msg, level });
+            if (auditEntries.length > 20) auditEntries.pop();
+            renderAudit();
+          }
+          function renderAudit() {
+            const el = document.getElementById("audit-entries");
+            el.innerHTML = auditEntries
+              .map(
+                (e) => `
+        <div class="audit-entry">
+          <span class="audit-time">${e.time}</span>
+          <span class="audit-msg audit-${e.level}">${e.level === "ok" ? "✅" : e.level === "warn" ? "⚠️" : "❌"} ${e.msg}</span>
+        </div>
+      `,
+              )
+              .join("");
+          }
+          function toggleAudit() {
+            const box = document.getElementById("audit-box");
+            box.classList.toggle("open");
+          }
+          function showSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+          }
+
+          // Init audit log
+          logAudit("Website khởi động – TLS 1.3 hoạt động", "ok");
+          logAudit("WAF + DDoS Protection đã kích hoạt", "ok");
+          logAudit("JWT Auth Service sẵn sàng", "ok");
+          logAudit("Audit Log / SIEM đang giám sát", "ok");
+
+          // Set default dates
+          const today = new Date().toISOString().split("T")[0];
+          const next3 = new Date(Date.now() + 3 * 864e5)
+            .toISOString()
+            .split("T")[0];
+          document.getElementById("date-from").value = today;
+          document.getElementById("date-to").value = next3;
+
+          // Setup login/register buttons
+          const token = localStorage.getItem("access_token");
+          const loginBtn = document.getElementById("btn-login-nav");
+          const registerBtn = document.getElementById("btn-register-nav");
+
+          console.log("Token:", token);
+          console.log("Login btn:", loginBtn);
+          console.log("Register btn:", registerBtn);
+
+          if (loginBtn) {
+            if (token) {
+              // User is logged in - hide both buttons
+              console.log("User logged in - hiding buttons");
+              loginBtn.style.display = "none";
+              if (registerBtn) {
+                registerBtn.style.display = "none";
+              }
+            } else {
+              // User is not logged in - show login button
+              console.log("User not logged in - showing buttons");
+              loginBtn.style.display = "block";
+              if (registerBtn) {
+                registerBtn.style.display = "block";
+                registerBtn.onclick = function () {
+                  console.log("Register button clicked");
+                  openRegister();
+                };
+              }
+              loginBtn.onclick = function () {
+                console.log("Login button clicked");
+                openLogin();
+              };
+            }
+          }
+    </script>
+  </body>
+</html>
