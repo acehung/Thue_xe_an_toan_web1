@@ -1,0 +1,543 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản đồ vị trí xe thuê - AutoRent</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .map-wrapper {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        #map {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .vehicle-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .vehicle-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .vehicle-item {
+            background: #f9f9f9;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .vehicle-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+        
+        .vehicle-item.active {
+            background: #e8eaf6;
+            border-left-color: #764ba2;
+        }
+        
+        .vehicle-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.95em;
+        }
+        
+        .vehicle-plate {
+            color: #666;
+            font-size: 0.85em;
+            margin: 3px 0;
+        }
+        
+        .vehicle-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .status-available {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        .status-rented {
+            background: #ffccbc;
+            color: #d84315;
+        }
+        
+        .status-maintenance {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+        
+        .popup-content {
+            font-family: Arial, sans-serif;
+        }
+        
+        .popup-content h4 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .popup-content p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .popup-content strong {
+            color: #667eea;
+        }
+        
+        .footer {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .controls {
+            margin-bottom: 15px;
+        }
+        
+        .controls button {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        .controls button:hover {
+            background: #764ba2;
+        }
+        
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        
+        .legend-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .legend-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+        }
+        
+        .icon-available {
+            background: #4CAF50;
+        }
+        
+        .icon-rented {
+            background: #FF9800;
+        }
+        
+        .icon-maintenance {
+            background: #F44336;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+        
+        .leaflet-div-icon {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Bản đồ vị trí xe thuê</h1>
+            <p>Theo dõi vị trí thực thời của tất cả các xe trong hệ thống AutoRent</p>
+        </div>
+        
+        <div class="content">
+            <div class="map-wrapper">
+                <div id="map"></div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="controls">
+                    <button onclick="reloadVehicles()">🔄 Làm mới</button>
+                    <button onclick="resetMap()">🎯 Đặt lại bản đồ</button>
+                </div>
+                
+                <h3>📊 Thống kê</h3>
+                <div class="vehicle-stats">
+                    <div class="stat-card">
+                        <div class="number" id="total-vehicles">0</div>
+                        <div class="label">Tổng xe</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="available-vehicles">0</div>
+                        <div class="label">Có sẵn</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="rented-vehicles">0</div>
+                        <div class="label">Đang cho thuê</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number" id="maintenance-vehicles">0</div>
+                        <div class="label">Bảo trì</div>
+                    </div>
+                </div>
+                
+                <h3>🚗 Danh sách xe</h3>
+                <div class="vehicle-list" id="vehicle-list">
+                    <div class="loading">Đang tải...</div>
+                </div>
+                
+                <h3 style="margin-top: 20px;">📋 Chú thích</h3>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-icon icon-available">✓</div>
+                        <span>Có sẵn</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon icon-rented">🔒</div>
+                        <span>Đang cho thuê</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon icon-maintenance">⚙️</div>
+                        <span>Bảo trì</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 AutoRent - Hệ thống quản lý xe thuê | Bản đồ từ OpenStreetMap</p>
+        </div>
+    </div>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        let map;
+        let markers = {};
+        let vehicles = [];
+        
+        // Initialize map
+        function initMap() {
+            // Create map centered on Vietnam (average of HCMC and Hanoi)
+            map = L.map('map').setView([15.8700, 106.4425], 6);
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+            
+            loadVehicles();
+        }
+        
+        // Load vehicles from API
+        function loadVehicles() {
+            fetch('/api/vehicles/')
+                .then(response => response.json())
+                .then(data => {
+                    vehicles = data.vehicles || [];
+                    updateVehiclesDisplay();
+                    updateStats();
+                })
+                .catch(error => {
+                    console.error('Error loading vehicles:', error);
+                    document.getElementById('vehicle-list').innerHTML = 
+                        '<div class="loading">Lỗi tải dữ liệu. Vui lòng thử lại!</div>';
+                });
+        }
+        
+        // Display vehicles on map and list
+        function updateVehiclesDisplay() {
+            // Clear existing markers
+            Object.values(markers).forEach(marker => map.removeLayer(marker));
+            markers = {};
+            
+            // Add new markers
+            vehicles.forEach(vehicle => {
+                addVehicleMarker(vehicle);
+            });
+            
+            // Update vehicle list
+            updateVehicleList();
+        }
+        
+        // Add single vehicle marker
+        function addVehicleMarker(vehicle) {
+            const icon = getVehicleIcon(vehicle.status);
+            const marker = L.marker([vehicle.latitude, vehicle.longitude], { icon: icon })
+                .addTo(map);
+            
+            // Create popup content
+            const popupContent = `
+                <div class="popup-content">
+                    <h4>${vehicle.name}</h4>
+                    <p><strong>Biển số:</strong> ${vehicle.license_plate}</p>
+                    <p><strong>Loại xe:</strong> ${vehicle.vehicle_type}</p>
+                    <p><strong>Màu:</strong> ${vehicle.color}</p>
+                    <p><strong>Năm SX:</strong> ${vehicle.year}</p>
+                    <p><strong>Giá thuê:</strong> ${formatCurrency(vehicle.price_per_day)}/ngày</p>
+                    <p><strong>Trạng thái:</strong> <span class="vehicle-status status-${vehicle.status}">${getStatusText(vehicle.status)}</span></p>
+                    <p><strong>Vị trí:</strong> ${vehicle.location_name}</p>
+                    <p><strong>Tọa độ:</strong> ${vehicle.latitude.toFixed(4)}, ${vehicle.longitude.toFixed(4)}</p>
+                </div>
+            `;
+            
+            marker.bindPopup(popupContent);
+            marker.on('click', function() {
+                highlightVehicle(vehicle.id);
+            });
+            
+            markers[vehicle.id] = marker;
+        }
+        
+        // Get icon based on status
+        function getVehicleIcon(status) {
+            let className;
+            
+            switch(status) {
+                case 'available':
+                    className = 'icon-available';
+                    break;
+                case 'rented':
+                    className = 'icon-rented';
+                    break;
+                case 'maintenance':
+                    className = 'icon-maintenance';
+                    break;
+                default:
+                    className = 'icon-available';
+            }
+            
+            // Create custom HTML for marker
+            const html = `<div class="legend-icon ${className}" style="margin: 0; border-radius: 50%; font-size: 1.2em; line-height: 30px;">📍</div>`;
+            
+            return L.divIcon({
+                html: html,
+                iconSize: [30, 30],
+                className: 'leaflet-div-icon'
+            });
+        }
+        
+        // Update vehicle list
+        function updateVehicleList() {
+            const list = document.getElementById('vehicle-list');
+            
+            if (vehicles.length === 0) {
+                list.innerHTML = '<div class="loading">Không có xe nào</div>';
+                return;
+            }
+            
+            list.innerHTML = vehicles.map(vehicle => `
+                <div class="vehicle-item" onclick="highlightVehicle(${vehicle.id})">
+                    <div class="vehicle-name">${vehicle.name}</div>
+                    <div class="vehicle-plate">${vehicle.license_plate}</div>
+                    <span class="vehicle-status status-${vehicle.status}">${getStatusText(vehicle.status)}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Highlight vehicle
+        function highlightVehicle(vehicleId) {
+            // Remove previous highlight
+            document.querySelectorAll('.vehicle-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Highlight selected
+            const selected = document.querySelector(`.vehicle-item[onclick*="${vehicleId}"]`);
+            if (selected) selected.classList.add('active');
+            
+            // Center map on vehicle
+            if (markers[vehicleId]) {
+                const marker = markers[vehicleId];
+                map.setView(marker.getLatLng(), 13);
+                marker.openPopup();
+            }
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const stats = {
+                total: 0,
+                available: 0,
+                rented: 0,
+                maintenance: 0
+            };
+            
+            vehicles.forEach(vehicle => {
+                stats.total++;
+                if (vehicle.status === 'available') stats.available++;
+                else if (vehicle.status === 'rented') stats.rented++;
+                else if (vehicle.status === 'maintenance') stats.maintenance++;
+            });
+            
+            document.getElementById('total-vehicles').textContent = stats.total;
+            document.getElementById('available-vehicles').textContent = stats.available;
+            document.getElementById('rented-vehicles').textContent = stats.rented;
+            document.getElementById('maintenance-vehicles').textContent = stats.maintenance;
+        }
+        
+        // Utility functions
+        function getStatusText(status) {
+            const statusMap = {
+                'available': 'Có sẵn',
+                'rented': 'Đang cho thuê',
+                'maintenance': 'Bảo trì',
+                'inactive': 'Không hoạt động'
+            };
+            return statusMap[status] || status;
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(amount);
+        }
+        
+        function reloadVehicles() {
+            document.getElementById('vehicle-list').innerHTML = '<div class="loading">Đang tải...</div>';
+            loadVehicles();
+        }
+        
+        function resetMap() {
+            map.setView([15.8700, 106.4425], 6);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initMap);
+    </script>
+</body>
+</html>

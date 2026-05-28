@@ -1,0 +1,87 @@
+ERROR 2026-05-28 13:48:34 views 19100 18508 Login exception: Expecting value: line 1 column 1 (char 0)
+ERROR 2026-05-28 13:48:34 log 19100 18508 Internal Server Error: /api/login/
+ERROR 2026-05-28 13:48:34 log 19100 18508 "POST /api/login/ HTTP/1.1" 500 5675
+ERROR 2026-05-28 14:13:05 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:13:05 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:13:05 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:13:52 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:13:52 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:13:52 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:15:58 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:15:58 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:15:58 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:16:20 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:16:20 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:16:20 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:16:26 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:16:26 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:16:26 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:05 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:05 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:18:05 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:07 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:07 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:18:07 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:17 views 20904 21104 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:17 log 20904 21104 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:17 log 20904 21104 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:21 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:21 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:18:21 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:22 views 20904 21960 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:22 log 20904 21960 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:22 log 20904 21960 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:23 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:23 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:18:23 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:27 views 20904 22356 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:27 log 20904 22356 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:27 log 20904 22356 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:32 views 20904 22076 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:32 log 20904 22076 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:32 log 20904 22076 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:36 views 20904 21900 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:36 log 20904 21900 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:18:36 log 20904 21900 "GET /api/vehicles/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:38 views 20904 20048 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:38 log 20904 20048 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:38 log 20904 20048 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:43 views 20904 9552 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:43 log 20904 9552 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:43 log 20904 9552 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:48 views 20904 5832 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:48 log 20904 5832 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:48 log 20904 5832 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:53 views 20904 20916 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:53 log 20904 20916 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:53 log 20904 20916 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:18:58 views 20904 5140 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:18:58 log 20904 5140 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:18:58 log 20904 5140 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:01 views 20904 21940 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:01 log 20904 21940 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:19:01 log 20904 21940 "GET /api/vehicles/ HTTP/1.1" 500 5507
+ERROR 2026-05-28 14:19:03 views 20904 20024 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:03 log 20904 20024 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:03 log 20904 20024 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:03 views 20904 11976 Get vehicles exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:03 log 20904 11976 Internal Server Error: /api/vehicles/
+ERROR 2026-05-28 14:19:03 log 20904 11976 "GET /api/vehicles/ HTTP/1.1" 500 5507
+ERROR 2026-05-28 14:19:08 views 20904 16300 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:08 log 20904 16300 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:08 log 20904 16300 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:13 views 20904 4240 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:13 log 20904 4240 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:13 log 20904 4240 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:18 views 20904 22180 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:18 log 20904 22180 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:18 log 20904 22180 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:23 views 20904 14956 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:23 log 20904 14956 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:23 log 20904 14956 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:28 views 20904 6860 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:28 log 20904 6860 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:28 log 20904 6860 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
+ERROR 2026-05-28 14:19:33 views 20904 22048 Update vehicle location exception: no such table: api_vehicle
+ERROR 2026-05-28 14:19:33 log 20904 22048 Internal Server Error: /api/vehicles/1/location/
+ERROR 2026-05-28 14:19:33 log 20904 22048 "POST /api/vehicles/1/location/ HTTP/1.1" 500 45
