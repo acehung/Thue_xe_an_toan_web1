@@ -1,0 +1,13 @@
+.env
+*.env
+venv/
+node_modules/
+db.sqlite3
+logs/
+__pycache__/
+*.py[cod]
+*$py.class
+_gorent_zip/
+staticfiles/
+.vscode/
+.DS_Store
